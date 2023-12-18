@@ -1,0 +1,17 @@
+.list {
+  list-style: none;
+}
+
+.list a {
+  text-decoration: none;
+  color: white;
+  transition: all 0.2s;
+}
+
+.list li:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+.list a:hover {
+  color: #699dd8;
+}
