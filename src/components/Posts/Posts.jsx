@@ -5,6 +5,9 @@ function Posts() {
     <div>
       <h2>Мои посты</h2>
       <Post></Post>
+      <Post></Post>
+      <Post></Post>
+      <Post></Post>
     </div>
   );
 }
