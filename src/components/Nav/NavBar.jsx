@@ -5,16 +5,16 @@ function NavBar() {
     <nav className={styles.nav}>
       <ul className={styles.list}>
         <li>
-          <a href='#'>Profile</a>
+          <a href='#'>Профиль</a>
         </li>
         <li>
-          <a href='#'>Messages</a>
+          <a href='#'>Сообщения</a>
         </li>
         <li>
-          <a href='#'>News</a>
+          <a href='#'>Новости</a>
         </li>
         <li>
-          <a href='#'>Music</a>
+          <a href='#'>Музыка</a>
         </li>
       </ul>
     </nav>

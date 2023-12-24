@@ -13,7 +13,7 @@ function Header() {
           <input type='text' />
         </div>
 
-        <div className='music'>music</div>
+        <div className='music'>Музыка</div>
       </div>
     </header>
   );
