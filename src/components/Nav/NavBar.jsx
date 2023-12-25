@@ -5,6 +5,9 @@ function NavBar() {
     <nav className={styles.nav}>
       <ul className={styles.list}>
         <li>
+          <a href='/'>Главная</a>
+        </li>
+        <li>
           <a href='#'>Профиль</a>
         </li>
         <li>
@@ -15,6 +18,9 @@ function NavBar() {
         </li>
         <li>
           <a href='#'>Музыка</a>
+        </li>
+        <li>
+          <a href='#'>Настройки</a>
         </li>
       </ul>
     </nav>
