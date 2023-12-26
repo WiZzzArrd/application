@@ -9,8 +9,8 @@ function Header() {
           <img width={30} height={30} src={vk} alt='logo' />
           <p className={style["logo-text"]}>ВКОНТАКТЕ</p>
         </div>
-        <div className='search'>
-          <input type='text' />
+        <div className={style.search}>
+          <input placeholder="Поиск" type='text' />
         </div>
 
         <div className='music'>Музыка</div>

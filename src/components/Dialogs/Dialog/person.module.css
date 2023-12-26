@@ -1,0 +1,37 @@
+.person a {
+    color: white;
+    text-decoration: none;
+    transition: all .3s;
+
+}
+
+.person{
+    margin-bottom:10px;
+    position: relative;
+    margin-left: 10px;
+}
+
+
+
+.person a:focus{
+
+    color: #699dd8;
+
+}
+
+.person a:hover{
+    color: #699dd8;
+    cursor: pointer;
+}
+
+.person:before{
+    content: "";
+    width: 5px;
+    height: 5px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+}

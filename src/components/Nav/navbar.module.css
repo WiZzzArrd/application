@@ -2,6 +2,8 @@
   list-style: none;
 }
 
+
+
 .list a {
   text-decoration: none;
   color: white;
@@ -12,6 +14,8 @@
   margin-bottom: 6px;
 }
 
-.list a:hover {
+.list a:hover, .list a:focus {
   color: #699dd8;
 }
+
+

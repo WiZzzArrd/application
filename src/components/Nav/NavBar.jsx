@@ -1,26 +1,25 @@
 import styles from "./navbar.module.css";
+import { NavLink} from "react-router-dom";
 
 function NavBar() {
   return (
     <nav className={styles.nav}>
       <ul className={styles.list}>
         <li>
-          <a href='/'>Главная</a>
+          <NavLink  to='/profile'>Профиль</NavLink>
         </li>
         <li>
-          <a href='#'>Профиль</a>
+          <NavLink   to='/news'>Новости</NavLink>
         </li>
         <li>
-          <a href='#'>Сообщения</a>
+          <NavLink  to='/messages'>Сообщения</NavLink>
+        </li>
+
+        <li>
+          <NavLink to='/music'>Музыка</NavLink>
         </li>
         <li>
-          <a href='#'>Новости</a>
-        </li>
-        <li>
-          <a href='#'>Музыка</a>
-        </li>
-        <li>
-          <a href='#'>Настройки</a>
+          <NavLink  to='/settings'>Настройки</NavLink>
         </li>
       </ul>
     </nav>

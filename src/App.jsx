@@ -5,10 +5,11 @@ import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 
 function App() {
-  return (
+
+
+    return (
     <div className={style.app}>
       <div className={style.wrapper}>
-        <p>ddd</p>
         <Header></Header>
         <Main></Main>
       </div>
