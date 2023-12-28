@@ -1,8 +1,8 @@
 import style from "./Post.module.css";
-import likeIcon from "../../assets/icons/like.svg";
-import commentIcon from "../../assets/icons/comment.svg";
+import likeIcon from "../../../../../assets/icons/like.svg";
+import commentIcon from "../../../../../assets/icons/comment.svg";
 
-function Post({ message, like, comment }) {
+function Post({ message, likeCount, comment }) {
   return (
     <div className={style.post}>
       <div className={style.content}>
@@ -11,7 +11,7 @@ function Post({ message, like, comment }) {
       <div className={style.likeComment}>
         <div className={style.like}>
           <img src={`${likeIcon}`} alt='like' />
-          <span>{like || 0}</span>
+          <span>{likeCount || 0}</span>
         </div>
 
         <div className={style.comment}>

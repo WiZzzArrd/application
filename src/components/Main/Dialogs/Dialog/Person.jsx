@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 const Person = (props) => {
     return (
         <div className={style.person}>
-           <NavLink to={props.personUrl}>{props.name}</NavLink>
+           <NavLink to={`/messages/${props.id}`}>{props.name}</NavLink>
         </div>
     );
 };

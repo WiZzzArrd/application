@@ -1,11 +1,9 @@
-.chat{
+.chat {
     background-color: #222222;
     color: white;
     word-wrap: break-word;
-    width: 60%;
+    width: 80%;
 
     border-radius: 10px;
-    padding-left: 30px;
-    padding-top: 5px;
-    padding-right: 30px;
+    padding: 10px 30px;
 }

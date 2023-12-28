@@ -3,11 +3,14 @@ import style from "./dialogs.module.css";
 import Chat from "./Chat/Chat";
 import Dialog from "./Dialog/Dialog";
 
-const Dialogs = (props) => {
+const Dialogs = ({dialogItems, chatItems}) => {
+
+
+
     return (
         <section className={style.dialogs}>
-            <Dialog></Dialog>
-            <Chat></Chat>
+            <Dialog dialogsItems = {dialogItems}></Dialog>
+            <Chat chatItems = {chatItems}></Chat>
         </section>
     );
 };

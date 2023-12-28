@@ -1,5 +1,6 @@
 .dialogs{
     display: flex;
-    gap: 30px;
+    gap: 20px;
     width: 65%;
+    margin-top: 10px;
 }
