@@ -1,0 +1,16 @@
+.friend {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #323333;
+}
+
+.friend a{
+    text-decoration: none;
+    color: white;
+    transition: all .2s;
+}
+
+.friend a:hover{
+    text-decoration: underline;
+}

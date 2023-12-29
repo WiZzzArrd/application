@@ -6,8 +6,9 @@ import {Route,  Switch} from "react-router-dom";
 import Profile from "./Profile/Profile";
 import Settings from "./Settings/Settings";
 import Music from "./Music/Music";
+import Friends from "./Friends/Friends";
 
-function Main({postsData,dialogsData}) {
+function Main({postsData,dialogsData, friendsData, addPost, changePostInput}) {
 
 
 
@@ -18,11 +19,19 @@ function Main({postsData,dialogsData}) {
       <Sidebar></Sidebar>
 
         <Switch>
-            <Route exact path = "/news" render = {()=> <News postItems = {postsData.postItems}> </News> }></Route>
+
+
+            <Route exact path = "/news" render = {()=> <News changePostInput={ changePostInput} postItems = {postsData.postItems} addPost = {addPost}> </News> }></Route>
+
             <Route  path = "/messages" render = {()=> <Dialogs dialogItems = {dialogsData.dialogItems} chatItems = {dialogsData.chatItems}/>}></Route>
+
             <Route exact path = "/profile" component = {Profile}></Route>
+
             <Route exact path = "/settings" component = {Settings}></Route>
+
             <Route exact path = "/music" component = {Music}></Route>
+
+            <Route exact path = "/friends" render = {()=> <Friends friendsItems = {friendsData.friendsItems}/>}></Route>
         </Switch>
 
     </main>

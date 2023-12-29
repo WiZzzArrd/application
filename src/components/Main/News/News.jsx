@@ -1,10 +1,10 @@
 import Posts from "./Posts/Posts";
 import style from "./content.module.css";
 
-function News({postItems}) {
+function News({postItems, addPost, changePostInput}) {
   return (
     <div className={style.content}>
-      <Posts postItems =  {postItems}></Posts>
+      <Posts changePostInput = {changePostInput} addPost = {addPost} postItems =  {postItems}></Posts>
     </div>
   );
 }

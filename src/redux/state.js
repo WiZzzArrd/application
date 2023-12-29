@@ -1,3 +1,4 @@
+import {rerenderEntireTree} from "../render";
 
 
 let state = {
@@ -8,7 +9,6 @@ let state = {
         },  {
             id: 3, message: 'Всем привет', likeCount: "10", comment: 35,
         }]},
-
 
     messages: {dialogItems: [
         {id: 1, name: "Вася"},
@@ -21,6 +21,29 @@ let state = {
         {id: 3, message: "ok, have a good day"},
         {id: 4, message: ":)"},
     ]},
+
+    friends: {friendsItems:[{id: 1, userName: "Иван Горин" }, {id: 2, userName:  "Юля Соколова"}, {id:3, userName: "Анастасия Калачева"}, {id:4, userName: "No Nammme"}, {id:5, userName: "Wizzard RrR"}]}
 }
+
+
+
+export let addPost = (post) =>{
+
+    let postsLength = state.news.postItems.length - 1
+
+    let postItem = {
+        id: state.news.postItems[postsLength].id + 1,
+        message: post.message,
+        likeCount: post.likeCount || 0,
+        comment: post.comment || 0,
+    }
+
+    state.news.postItems.push(postItem)
+    rerenderEntireTree(state, addPost)
+}
+
+
+
+
 
 export default  state;

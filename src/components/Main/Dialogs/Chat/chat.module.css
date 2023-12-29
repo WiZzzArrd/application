@@ -7,3 +7,37 @@
     border-radius: 10px;
     padding: 10px 30px;
 }
+
+.send{
+
+    display: flex;
+    justify-content: center;
+}
+
+.send input{
+    padding-right: 20px;
+
+
+}
+
+
+.arrow {
+
+    position: absolute;
+    top: 0;
+    right: 5px;
+    cursor: pointer;
+}
+
+.send img{
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.send img:hover{
+    transform: scale(1.1);
+}
+
+
+
+

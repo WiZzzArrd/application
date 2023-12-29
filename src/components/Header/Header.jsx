@@ -9,7 +9,7 @@ function Header() {
           <img width={30} height={30} src={vk} alt='logo' />
           <p className={style["logo-text"]}>ВКОНТАКТЕ</p>
         </div>
-        <div className={style.search}>
+        <div className="search">
           <input placeholder="Поиск" type='text' />
         </div>
 
