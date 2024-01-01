@@ -8,7 +8,8 @@ import Settings from "./Settings/Settings";
 import Music from "./Music/Music";
 import Friends from "./Friends/Friends";
 
-function Main({postsData,dialogsData, friendsData, addPost, changePostInput}) {
+
+function Main({postsData,dialogsData, friendsData,dispatch }) {
 
 
 
@@ -21,9 +22,9 @@ function Main({postsData,dialogsData, friendsData, addPost, changePostInput}) {
         <Switch>
 
 
-            <Route exact path = "/news" render = {()=> <News changePostInput={ changePostInput} postItems = {postsData.postItems} addPost = {addPost}> </News> }></Route>
+            <Route exact path = "/news" render = {()=> <News  postItems = {postsData?.postItems} postText = {postsData?.postText} dispatch = {dispatch}> </News> }></Route>
 
-            <Route  path = "/messages" render = {()=> <Dialogs dialogItems = {dialogsData.dialogItems} chatItems = {dialogsData.chatItems}/>}></Route>
+            <Route  path = "/messages" render = {()=> <Dialogs dialogItems = {dialogsData?.dialogItems} chatItems = {dialogsData?.chatItems}  dispatch = {dispatch}  chatText = {dialogsData?.chatText}/>}></Route>
 
             <Route exact path = "/profile" component = {Profile}></Route>
 
@@ -31,7 +32,7 @@ function Main({postsData,dialogsData, friendsData, addPost, changePostInput}) {
 
             <Route exact path = "/music" component = {Music}></Route>
 
-            <Route exact path = "/friends" render = {()=> <Friends friendsItems = {friendsData.friendsItems}/>}></Route>
+            <Route exact path = "/friends" render = {()=> <Friends friendsItems = {friendsData?.friendsItems}/>}></Route>
         </Switch>
 
     </main>

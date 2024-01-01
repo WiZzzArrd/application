@@ -5,6 +5,17 @@ import Friend from "./Friend/Friend";
 
 
 const Friends = ({friendsItems}) => {
+    let friendsData = "";
+
+    if(!friendsItems){
+        friendsData = <p >Тут пока нет друзей...</p>
+    }else{
+        friendsData = friendsItems.map((friend)=>{
+            return <Friend key = {friend.id} id = {friend.id} userName={friend.userName}></Friend>
+        })
+    }
+
+
     return (
         <div className={style.wrap}>
             <div className="search friends__search" >
@@ -12,9 +23,7 @@ const Friends = ({friendsItems}) => {
             </div>
 
             <div className={style.friends}>
-                {friendsItems.map((friend)=>{
-                    return <Friend key = {friend.id} id = {friend.id} userName={friend.userName}></Friend>
-                })}
+                {friendsData}
             </div>
         </div>
     );

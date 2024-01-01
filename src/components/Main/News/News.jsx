@@ -1,10 +1,13 @@
 import Posts from "./Posts/Posts";
 import style from "./content.module.css";
 
-function News({postItems, addPost, changePostInput}) {
+function News({postItems, dispatch, postText}) {
+
+
+
   return (
     <div className={style.content}>
-      <Posts changePostInput = {changePostInput} addPost = {addPost} postItems =  {postItems}></Posts>
+      <Posts dispatch = {dispatch} postItems =  {postItems} postText={postText}></Posts>
     </div>
   );
 }
