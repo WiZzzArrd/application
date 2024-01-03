@@ -8,7 +8,7 @@ import App from "./App";
 import {store} from "./redux/state";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-export let rerenderEntireTree = (state)=> {
+export let rerenderEntireTree = ()=> {
 
 
 

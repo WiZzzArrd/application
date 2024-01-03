@@ -1,12 +1,13 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import style from "./chat.module.css";
 import Message from "./Message";
 import send from "../../../../assets/icons/send.svg"
+import {addMessageActionCreator, updateMessageActionCreator} from "../../../../redux/messages-reducer";
+
+
+
 
 const Chat = ({chatItems,dispatch, chatText}) => {
-
-
-
     let chatData = "";
 
     if(!chatItems){
@@ -20,17 +21,12 @@ const Chat = ({chatItems,dispatch, chatText}) => {
     const inputRef = useRef();
 
         function clickHandler(){
-
-            dispatch({type : "ADD-MESSAGE", payload: {message:  inputRef.current.value}})
-
-            dispatch({type: "UPDATE-MESSAGE", payload: {text: ""}})
-
-
+            dispatch(addMessageActionCreator(inputRef.current.value))
+            dispatch(updateMessageActionCreator(""))
         }
 
         function changeInputHandler(){
-
-            dispatch({type: "UPDATE-MESSAGE", payload: {text: inputRef.current.value}})
+            dispatch(updateMessageActionCreator(inputRef.current.value))
         }
 
 

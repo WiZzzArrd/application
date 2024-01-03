@@ -1,11 +1,11 @@
 import Post from "./Post/Post";
 import style from "./Posts.module.css";
 import {useRef} from "react";
+import {addPostActionCreator, changePostTextActionCreator} from "../../../../redux/news-reducer";
+
+
 
 function Posts({postItems, dispatch, postText}) {
-
-
-
     let postData = ""
 
     if(!postItems){
@@ -19,21 +19,17 @@ function Posts({postItems, dispatch, postText}) {
 let inputRef  = useRef()
 
     const addPostHandler = ()=>{
-
-        dispatch({type: "ADD-POST", payload: {post: {message: inputRef.current.value}}})
-
-        dispatch({type: "CHANGE-POST-TEXT", payload: {text: ""}})
+        dispatch(addPostActionCreator(inputRef.current.value))
+        dispatch(changePostTextActionCreator(""))
     }
 
     const changeInputHandler = ()=>{
-
-        dispatch({type: "CHANGE-POST-TEXT", payload: {text: inputRef.current.value}})
-
+        dispatch(changePostTextActionCreator(inputRef.current.value))
     }
 
     return (
         <div>
-            <div className={style.form}>
+            <div  className={style.form}>
                 <input ref={inputRef} type='text' placeholder='Что нового?'
                     value={postText}
                        onChange={changeInputHandler}

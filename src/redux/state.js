@@ -1,4 +1,13 @@
+import newsReducer from "./news-reducer";
+import messagesReducer from "./messages-reducer";
+import {friendsReducer} from "./friends-reducer";
+
+
+
+
+
 export let store = {
+
     _state: {
         news: {
             postItems: [{
@@ -6,7 +15,7 @@ export let store = {
             }, {
                 id: 2, message: 'Всем пока', likeCount: "100", comment: "45",
             }, {
-                id: 3, message: 'Всем привет', likeCount: "10", comment: 35,
+                id: 3, message: 'Всем привет', likeCount: "10", comment: "35",
             }],
             postText: "",
         },
@@ -46,44 +55,18 @@ export let store = {
         return this._state;
     },
 
-    dispatch({type, payload}) {
-        if (type === "ADD-POST") {
-            let postsLength = this._state.news.postItems.length - 1
+    dispatch(action) {
+        this._state.news = newsReducer(this._state.news, action)
+        this._state.messages = messagesReducer(this._state.messages, action)
+        this._state.friends = friendsReducer(this._state.friends, action)
 
-            let postItem = {
-                id: this._state.news.postItems[postsLength].id + 1,
-                message: payload.post.message || "...",
-                likeCount: payload.post?.likeCount || 0,
-                comment: payload.post?.comment || 0,
-            }
-
-            this._state.news.postItems.push(postItem);
-            this._subscriber(this._state);
-
-        } else if (type === "CHANGE-POST-TEXT") {
-            this._state.news.postText = payload.text;
-            this._subscriber(this._state);
-        } else if (type === "ADD-MESSAGE") {
-
-
-
-            let messagesLength = this._state.messages.chatItems.length - 1;
-
-            let newMessage = {
-                id: this._state.messages.chatItems[messagesLength].id + 1,
-                message: payload.message,
-            }
-
-            this._state.messages.chatItems.push(newMessage)
-
-            this._subscriber(this._state)
-        } else if (type === "UPDATE-MESSAGE") {
-            this._state.messages.chatText = payload.text;
-
-            this._subscriber(this._state);
-        }
+        this._subscriber(this._state);
     }
-}
+};
+
+
+
+
 
 window.store = store;
 
