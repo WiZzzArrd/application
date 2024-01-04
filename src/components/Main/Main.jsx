@@ -9,10 +9,7 @@ import Music from "./Music/Music";
 import Friends from "./Friends/Friends";
 
 
-function Main({postsData,dialogsData, friendsData,dispatch }) {
-
-
-
+function Main() {
 
 
   return (
@@ -20,11 +17,9 @@ function Main({postsData,dialogsData, friendsData,dispatch }) {
       <Sidebar></Sidebar>
 
         <Switch>
+            <Route exact path = "/news" render = {()=> <NewsContainer/> }></Route>
 
-
-            <Route exact path = "/news" render = {()=> <NewsContainer postItems = {postsData?.postItems} postText = {postsData?.postText} dispatch = {dispatch}> </NewsContainer> }></Route>
-
-            <Route  path = "/messages" render = {()=> <DialogsContainer dialogItems = {dialogsData?.dialogItems} chatItems = {dialogsData?.chatItems} dispatch = {dispatch} chatText = {dialogsData?.chatText}/>}></Route>
+            <Route  path = "/messages" render = {()=> <DialogsContainer/>}></Route>
 
             <Route exact path = "/profile" component = {Profile}></Route>
 
@@ -32,7 +27,7 @@ function Main({postsData,dialogsData, friendsData,dispatch }) {
 
             <Route exact path = "/music" component = {Music}></Route>
 
-            <Route exact path = "/friends" render = {()=> <Friends friendsItems = {friendsData?.friendsItems}/>}></Route>
+            <Route exact path = "/friends" render = {()=> <Friends />}></Route>
         </Switch>
 
     </main>

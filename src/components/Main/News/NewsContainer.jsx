@@ -1,28 +1,34 @@
 import Posts from "./Posts/Posts";
 import style from "./content.module.css";
 import {addPostActionCreator, changePostTextActionCreator} from "../../../redux/news-reducer";
+import StoreContext from "../../../storeContext";
 
-function NewsContainer({postItems, dispatch, postText}) {
+function NewsContainer() {
 
+    return (
 
-    const addPostHandler = (text)=>{
-        dispatch(addPostActionCreator(text))
-        dispatch(changePostTextActionCreator(""))
-    }
+        <StoreContext.Consumer>
+            {(store)=>{
+                let state = store.getState();
 
-    const changeInputHandler = (text)=>{
-        dispatch(changePostTextActionCreator(text))
-    }
+                const addPostHandler = (text) => {
+                    store.dispatch(addPostActionCreator(text))
+                    store.dispatch(changePostTextActionCreator(""))
+                }
 
-
-
-  return (
-    <div className={style.content}>
-      <Posts updatePostText = {changeInputHandler}
-             addPost = {addPostHandler}
-             postItems =  {postItems} postText={postText}></Posts>
-    </div>
-  );
+                const changeInputHandler = (text) => {
+                    store.dispatch(changePostTextActionCreator(text))
+                }
+            return (
+            <div className={style.content}>
+            <Posts updatePostText = {changeInputHandler}
+            addPost = {addPostHandler}
+            postItems =  {state.newsReducer.postItems} postText={state.newsReducer.postText}></Posts>
+            </div>
+            )
+        }}
+        </StoreContext.Consumer>
+    );
 }
 
 export default NewsContainer;

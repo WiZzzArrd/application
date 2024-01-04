@@ -5,17 +5,13 @@ import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 
 
-function App({state, store}) {
+function App() {
 
     return (
     <div className={style.app}>
       <div className={style.wrapper}>
         <Header></Header>
-        <Main postsData= {state.newsReducer}
-              dialogsData={state.messagesReducer}
-              friendsData = {state.friendsReducer}
-              dispatch = {store.dispatch.bind(store)}
-        ></Main>
+        <Main></Main>
       </div>
     </div>
   );
