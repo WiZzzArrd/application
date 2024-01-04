@@ -1,12 +1,12 @@
 import newsReducer from "./news-reducer";
 import messagesReducer from "./messages-reducer";
-import {friendsReducer} from "./friends-reducer";
+import friendsReducer from "./friends-reducer";
 
 
 
 
 
-export let store = {
+ let store = {
 
     _state: {
         news: {
@@ -66,9 +66,6 @@ export let store = {
 
 
 
-
-
-window.store = store;
 
 
 

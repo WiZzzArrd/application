@@ -7,15 +7,13 @@ import Main from "./components/Main/Main";
 
 function App({state, store}) {
 
-
-
     return (
     <div className={style.app}>
       <div className={style.wrapper}>
         <Header></Header>
-        <Main postsData= {state.news}
-              dialogsData={state.messages}
-              friendsData = {state.friends}
+        <Main postsData= {state.newsReducer}
+              dialogsData={state.messagesReducer}
+              friendsData = {state.friendsReducer}
               dispatch = {store.dispatch.bind(store)}
         ></Main>
       </div>

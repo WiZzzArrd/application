@@ -13,7 +13,6 @@ export const  addPostActionCreator = (message)=>{
     }
 }
 
-
 export const  changePostTextActionCreator = (text)=>{
 
     return {
@@ -23,7 +22,19 @@ export const  changePostTextActionCreator = (text)=>{
 }
 
 
-const newsReducer = (state, action)=>{
+let initialState = {
+    postItems: [{
+        id: 1, message: 'Всем привет', likeCount: "10", comment: "4",
+    }, {
+        id: 2, message: 'Всем пока', likeCount: "100", comment: "45",
+    }, {
+        id: 3, message: 'Всем привет', likeCount: "10", comment: "35",
+    }],
+    postText: "",
+}
+
+
+ const newsReducer = (state  = initialState, action)=>{
     switch (action.type) {
         case ADD_POST:
             let postsLength = state.postItems.length - 1

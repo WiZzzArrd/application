@@ -2,12 +2,12 @@ import React, {useRef} from 'react';
 import style from "./chat.module.css";
 import Message from "./Message";
 import send from "../../../../assets/icons/send.svg"
-import {addMessageActionCreator, updateMessageActionCreator} from "../../../../redux/messages-reducer";
 
 
 
 
-const Chat = ({chatItems,dispatch, chatText}) => {
+
+const Chat = ({chatItems, addMessage, changeMessage, chatText}) => {
     let chatData = "";
 
     if(!chatItems){
@@ -20,34 +20,26 @@ const Chat = ({chatItems,dispatch, chatText}) => {
 
     const inputRef = useRef();
 
-        function clickHandler(){
-            dispatch(addMessageActionCreator(inputRef.current.value))
-            dispatch(updateMessageActionCreator(""))
-        }
+    function onAddMessage (){
+        addMessage(inputRef.current.value)
+    }
 
-        function changeInputHandler(){
-            dispatch(updateMessageActionCreator(inputRef.current.value))
-        }
-
+    function onChangeMessage(){
+        changeMessage(inputRef.current.value)
+    }
 
 
     return (
         <div className={style.chat}>
             {chatData}
-
             <div className={style.send}>
                 <div className="search">
                     <input ref={inputRef}
                           placeholder="Напишите сообщение..." type="text"
-                           value = {chatText}
-                            onChange={changeInputHandler}
+                           value = {chatText} onChange={onChangeMessage}
                     />
-
-
                 </div>
-
-
-               <img onClick={clickHandler} src={send} width={30} height={30} alt="send"/>
+               <img onClick={onAddMessage} src={send} width={30} height={30} alt="send"/>
             </div>
         </div>
     );
