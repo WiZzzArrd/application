@@ -5,9 +5,9 @@ import friendsReducer from "./friends-reducer";
 
 
 let reducersBatch = combineReducers({
-    newsReducer: newsReducer,
-    messagesReducer: messagesReducer,
-    friendsReducer: friendsReducer,
+    news: newsReducer,
+    messages: messagesReducer,
+    friends: friendsReducer,
 });
 
 export let store = legacy_createStore(reducersBatch);

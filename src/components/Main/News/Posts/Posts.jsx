@@ -5,13 +5,15 @@ import {useRef} from "react";
 
 
 
-function Posts({postItems, postText, addPost, updatePostText}) {
+function Posts({news, updatePostText, addPost}) {
     let postData = ""
 
-    if(!postItems){
+
+
+    if(!news.postItems){
         postData = <p>Тут пока нет постов...</p>
     }else{
-        postData = postItems.map((item)=>{
+        postData = news.postItems.map((item)=>{
             return <Post key = {item.id} likeCount = {item.likeCount} comment={item.comment} message={item.message}></Post>
         })
     }
@@ -28,10 +30,10 @@ let inputRef  = useRef()
 
 
     return (
-        <div>
+        <div className={style.content}>
             <div  className={style.form}>
                 <input ref={inputRef} type='text' placeholder='Что нового?'
-                    value={postText}
+                    value={news.postText}
                        onChange={onPostChange}
                 />
                 <button onClick={onAddPost}>Опубликовать</button>

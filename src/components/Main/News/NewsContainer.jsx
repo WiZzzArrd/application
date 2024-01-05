@@ -1,34 +1,28 @@
 import Posts from "./Posts/Posts";
 import style from "./content.module.css";
 import {addPostActionCreator, changePostTextActionCreator} from "../../../redux/news-reducer";
-import StoreContext from "../../../storeContext";
+import {connect} from "react-redux";
 
-function NewsContainer() {
 
-    return (
 
-        <StoreContext.Consumer>
-            {(store)=>{
-                let state = store.getState();
 
-                const addPostHandler = (text) => {
-                    store.dispatch(addPostActionCreator(text))
-                    store.dispatch(changePostTextActionCreator(""))
-                }
+let mapStateToProps = (state) => {
+    return {
+        news: state.news
+    }
+};
 
-                const changeInputHandler = (text) => {
-                    store.dispatch(changePostTextActionCreator(text))
-                }
-            return (
-            <div className={style.content}>
-            <Posts updatePostText = {changeInputHandler}
-            addPost = {addPostHandler}
-            postItems =  {state.newsReducer.postItems} postText={state.newsReducer.postText}></Posts>
-            </div>
-            )
-        }}
-        </StoreContext.Consumer>
-    );
+let mapDispatchToProps = (dispatch)=>{
+    return {
+        updatePostText: (text)=>{
+            dispatch(changePostTextActionCreator(text))
+        },
+        addPost: (text)=>{
+            dispatch(addPostActionCreator(text))
+        },
+    }
 }
+
+const NewsContainer = connect(mapStateToProps,mapDispatchToProps)(Posts);
 
 export default NewsContainer;

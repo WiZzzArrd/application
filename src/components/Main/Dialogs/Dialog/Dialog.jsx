@@ -2,13 +2,16 @@ import React from 'react';
 import style from "./dialog.module.css";
 import Person from "./Person";
 
-const Dialog = ({dialogsItems}) => {
+const Dialog = ({dialogItems}) => {
+
+
+
     let dialogData = ""
 
-    if(!dialogsItems){
+    if(!dialogItems){
         dialogData = <p>Нет пользователей :(</p>
     }else{
-        dialogData = dialogsItems.map((item)=> {
+        dialogData = dialogItems.map((item)=> {
             return <Person id={item.id} name={item.name} key={item.id}></Person>
         })
     }

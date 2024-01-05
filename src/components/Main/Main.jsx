@@ -7,6 +7,7 @@ import Profile from "./Profile/Profile";
 import Settings from "./Settings/Settings";
 import Music from "./Music/Music";
 import Friends from "./Friends/Friends";
+import FriendsContainer from "./Friends/FriendsContainer";
 
 
 function Main() {
@@ -27,7 +28,7 @@ function Main() {
 
             <Route exact path = "/music" component = {Music}></Route>
 
-            <Route exact path = "/friends" render = {()=> <Friends />}></Route>
+            <Route exact path = "/friends" render = {()=> <FriendsContainer />}></Route>
         </Switch>
 
     </main>

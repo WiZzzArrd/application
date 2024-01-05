@@ -5,10 +5,9 @@ import send from "../../../../assets/icons/send.svg"
 
 
 
-
-
-const Chat = ({chatItems, addMessage, changeMessage, chatText}) => {
+const Chat = ({addMessage, chatItems , changeMessage, chatText}) => {
     let chatData = "";
+
 
     if(!chatItems){
         chatData = <p>Тут пока нет сообщений..."</p>
