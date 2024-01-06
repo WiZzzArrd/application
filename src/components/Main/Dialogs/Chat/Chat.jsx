@@ -33,12 +33,12 @@ const Chat = ({addMessage, chatItems , changeMessage, chatText}) => {
             {chatData}
             <div className={style.send}>
                 <div className="search">
-                    <input ref={inputRef}
+                    <input   ref={inputRef}
                           placeholder="Напишите сообщение..." type="text"
                            value = {chatText} onChange={onChangeMessage}
                     />
                 </div>
-               <img onClick={onAddMessage} src={send} width={30} height={30} alt="send"/>
+                <img  onClick={onAddMessage} src={send} width={30} height={30} alt="send"/>
             </div>
         </div>
     );

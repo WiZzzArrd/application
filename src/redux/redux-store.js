@@ -13,5 +13,7 @@ let reducersBatch = combineReducers({
 export let store = legacy_createStore(reducersBatch);
 
 
+window.store = store.getState();
+
 
 export default  store;

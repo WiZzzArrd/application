@@ -2,7 +2,7 @@ export const ADD_POST = "ADD-POST";
 export const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
 
 
-export const  addPostActionCreator = (message)=>{
+export const addPostActionCreator = (message) => {
 
     return {
         type: ADD_POST,
@@ -13,7 +13,7 @@ export const  addPostActionCreator = (message)=>{
     }
 }
 
-export const  changePostTextActionCreator = (text)=>{
+export const changePostTextActionCreator = (text) => {
 
     return {
         type: CHANGE_POST_TEXT,
@@ -34,9 +34,9 @@ let initialState = {
 }
 
 
- const newsReducer = (state  = initialState, action)=>{
+const newsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             let postsLength = state.postItems.length - 1
 
             let postItem = {
@@ -46,15 +46,20 @@ let initialState = {
                 comment: action.post?.comment || 0,
             }
 
-            state.postItems.push(postItem);
-            state.postText = "";
-            break;
-        case CHANGE_POST_TEXT:
-            state.postText = action.text;
-            break;
+            return  {...state, postItems: [...state.postItems, postItem], postText: ""}
+
+        }
+        case CHANGE_POST_TEXT: {
+            return  {...state, postText: action.text};
+
+
+        }
+        default : {
+            return state;
+        }
     }
 
-    return state
+
 }
 
 export default newsReducer;
