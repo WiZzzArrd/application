@@ -38,7 +38,9 @@ const Chat = ({addMessage, chatItems , changeMessage, chatText}) => {
                            value = {chatText} onChange={onChangeMessage}
                     />
                 </div>
-                <img  onClick={onAddMessage} src={send} width={30} height={30} alt="send"/>
+                <button onClick={onAddMessage} className={style.btn}>
+                {/*<img  onClick={onAddMessage} src={send} width={30} height={30} alt="send"/>*/}
+                </button>
             </div>
         </div>
     );

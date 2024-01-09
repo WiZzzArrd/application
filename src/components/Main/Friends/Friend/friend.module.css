@@ -3,6 +3,7 @@
     align-items: center;
     gap: 10px;
     border-bottom: 1px solid #323333;
+    padding: 10px 0px;
 }
 
 .friend a{
@@ -11,6 +12,46 @@
     transition: all .2s;
 }
 
+.friend img{
+    border-radius: 50%;
+}
+
 .friend a:hover{
     text-decoration: underline;
 }
+
+.infoblock {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.info p{
+    color:#939393;
+}
+
+.actions button{
+    color: black;
+    background: white;
+    padding: 5px 10px;
+    border-radius: 7px;
+    font-size: 14px;
+    transition: all .3s;
+
+}
+
+.actions button:hover{
+    text-decoration: none;
+    background-color: #cecece;
+    cursor: pointer;
+}
+
+

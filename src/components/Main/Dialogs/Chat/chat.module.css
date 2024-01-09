@@ -38,6 +38,22 @@
     transform: scale(1.1);
 }
 
+.btn{
+    background: none;
+    border: none;
+    transition: all .3s;
+}
+
+.btn:after{
+    content: url("../../../../assets/icons/send.svg");
+    cursor: pointer;
+}
+
+.btn:hover{
+    transform: scale(1.1);
+}
+
+
 
 
 

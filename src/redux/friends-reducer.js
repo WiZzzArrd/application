@@ -1,14 +1,72 @@
+const FOLLOW = "FOLLOW";
+const UNFOLLOW = "UNFOLLOW";
+const SET_FRIENDS = "SET-FRIENDS"
 
 let initialState = {
-    friendsItems: [{id: 1, userName: "Иван Горин"}, {id: 2, userName: "Юля Соколова"}, {
-        id: 3,
-        userName: "Анастасия Калачева"
-    }, {id: 4, userName: "No Nammme"}, {id: 5, userName: "Wizzard RrR"}]
+    friendsItems: []
 }
 
-
-const friendsReducer = (state = initialState, action)=>{
-    return state;
+export const followAC = (userId)=>{
+    return {
+        type: FOLLOW,
+        userId
+    }
 }
 
-export default  friendsReducer;
+export const unfollowAC = (userId)=>{
+    return {
+        type: UNFOLLOW,
+        userId
+    }
+}
+
+export const setFriendsAC = (friends)=>{
+    return {
+        type: SET_FRIENDS,
+        friends,
+    }
+}
+
+const friendsReducer = (state = initialState, action) => {
+
+    switch (action.type){
+        case FOLLOW : {
+            let stateCopy = {...state, friendsItems: state.friendsItems.map((friend)=>{
+                if(friend.id === action.userId){
+                    return {...friend, followed: true}
+                }
+
+                return friend
+            })
+            }
+
+            return stateCopy;
+        }
+
+        case  UNFOLLOW: {
+            let stateCopy = {...state, friendsItems: state.friendsItems.map((friend)=>{
+                    if(friend.id === action.userId){
+                        return {...friend, followed: false}
+                    }
+
+                    return friend
+                })
+            }
+
+            return stateCopy;
+        }
+
+        case SET_FRIENDS: {
+            return {...state, friendsItems: [...state.friendsItems, ...action.friends]}
+            break
+        }
+
+        default: {
+            return state;
+        }
+
+    }
+
+}
+
+export default friendsReducer;
