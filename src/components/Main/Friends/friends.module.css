@@ -23,3 +23,43 @@
     cursor: pointer;
 }
 
+.friends{
+    max-width: 100%;
+
+}
+
+
+.pages{
+    max-width: 100%;
+    overflow: scroll;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    overflow-y: hidden;
+    padding-bottom: 5px;
+}
+
+.friends ::-webkit-scrollbar{
+    background-color: #141414;
+    border-radius: 10px;
+    height: 8px;
+}
+.friends ::-webkit-scrollbar-thumb{
+    background-color: #323333;
+    border-radius: 10px;
+}
+
+.pages span{
+    color: white;
+    transition: all .3s;
+}
+
+.pages span:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.selected{
+    font-weight: bold;
+    transform: scale(1.1);
+}

@@ -6,7 +6,6 @@ import {Route,  Switch} from "react-router-dom";
 import Profile from "./Profile/Profile";
 import Settings from "./Settings/Settings";
 import Music from "./Music/Music";
-import Friends from "./Friends/Friends";
 import FriendsContainer from "./Friends/FriendsContainer";
 
 

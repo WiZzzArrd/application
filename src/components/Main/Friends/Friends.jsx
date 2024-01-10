@@ -1,42 +1,45 @@
-import React, {Component} from 'react';
+import React from 'react';
 import style from "./friends.module.css";
-import axios from "axios";
 import Friend from "./Friend/Friend";
 
-class Friends extends Component {
+const Friends = (props) => {
 
+    let pagesCount = Math.ceil(props.totalCount / props.pageSize);
 
-    componentDidMount() {
+    let pages = [];
 
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response) => {
-
-            this.props.setFriends(response.data.items)
-
-        })
+    for (let i = 1; i <= pagesCount ; i++) {
+        pages.push(i)
     }
 
+    let buttons =  pages.map((button) => {
+        return <span key={button}
+                     onClick={() => props.onChangePage(button)}
+                     className={props.currentPage === button && style.selected}>{button}</span>
+    })
+
+    let friends = props.friends.map((friend) => {
+        return <Friend key={friend.id} id={friend.id} userName={friend.name} userInfo={friend.status}
+                       followed={friend.followed} avatar={friend.photos} follow={props.follow}
+                       unfollow={props.unfollow}></Friend>
+    })
 
 
 
-    render() {
-        return (
-            <div className={style.wrap}>
-                <div className="search friends__search">
-                    <input type="text" placeholder={"Поиск"}/>
-                </div>
-
-                <div className={style.friends}>
-
-
-                    {this.props.friends.map((friend) => {
-                        return <Friend key={friend.id} id={friend.id} userName={friend.name} userInfo={friend.status}
-                                       followed={friend.followed} avatar={friend.photos} follow={this.props.follow}
-                                       unfollow={this.props.unfollow}></Friend>
-                    })}
-                </div>
+    return (
+        <div className={style.wrap}>
+            <div className="search friends__search">
+                <input type="text" placeholder={"Поиск"}/>
             </div>
-        );
-    }
-}
+
+            <div className={style.friends}>
+                <div className={style.pages}>
+                    {buttons}
+                </div>
+                   {friends}
+            </div>
+        </div>
+    );
+};
 
 export default Friends;

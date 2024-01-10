@@ -36,6 +36,9 @@
 
 .info p{
     color:#939393;
+    width: 140px;
+    display: inline-block;
+    word-wrap: break-word;
 }
 
 .actions button{
