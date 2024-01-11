@@ -1,8 +1,11 @@
 import React from 'react';
 import style from "./friends.module.css";
 import Friend from "./Friend/Friend";
+import Loader from "../../../UI/Loader/Loader";
 
 const Friends = (props) => {
+
+
 
     let pagesCount = Math.ceil(props.totalCount / props.pageSize);
 
@@ -33,10 +36,15 @@ const Friends = (props) => {
             </div>
 
             <div className={style.friends}>
-                <div className={style.pages}>
-                    {buttons}
-                </div>
-                   {friends}
+                {props.isPagesLoading  ? <Loader style = {{marginTop: "20px"}}/> :
+                    <div className={style.pages}>
+                        {buttons}
+                    </div>
+                }
+
+                {props.isFriendsLoading ? <Loader style = {{marginTop: "50px"}}/> :
+                    friends
+                }
             </div>
         </div>
     );

@@ -1,14 +1,18 @@
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
-const SET_FRIENDS = "SET-FRIENDS"
-const SET_CURRENT_PAGE = "SET-CURRENT-PAGE"
-const SET_TOTAL_COUNT = "SET-TOTAL-COUNT"
+const SET_FRIENDS = "SET-FRIENDS";
+const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
+const SET_TOTAL_COUNT = "SET-TOTAL-COUNT";
+const SET_IS_PAGES_LOADING = "SET-IS-PAGES-LOADING";
+const SET_IS_FRIENDS_LOADING = "SET-IS-FRIENDS-LOADING";
 
 let initialState = {
     friendsItems: [],
     pageSize: 5,
     totalCount: 0,
     currentPage: 1,
+    isPagesLoading: false,
+    isFriendsLoading: false,
 }
 
 export const followAC = (userId)=>{
@@ -43,6 +47,20 @@ export const setTotalCountAC = (count)=>{
     return {
         type: SET_TOTAL_COUNT,
         count,
+    }
+}
+
+export const setIsPagesLoadingAC = (flag)=>{
+    return {
+        type: SET_IS_PAGES_LOADING,
+        flag,
+    }
+}
+
+export const setIsFriendsLoadingAC= (flag)=>{
+    return {
+        type: SET_IS_FRIENDS_LOADING,
+        flag,
     }
 }
 
@@ -86,6 +104,17 @@ const friendsReducer = (state = initialState, action) => {
 
         case SET_TOTAL_COUNT:{
             return  {...state, totalCount: action.count / 100}
+        }
+
+        case SET_IS_PAGES_LOADING:{
+            return {...state, isPagesLoading: action.flag, }
+        }
+
+        case SET_IS_FRIENDS_LOADING:{
+            return {
+                ...state,
+                isFriendsLoading: action.flag,
+            }
         }
 
         default: {

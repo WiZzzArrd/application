@@ -1,5 +1,12 @@
 import {connect} from "react-redux";
-import {followAC, setCurrentPageAC, setFriendsAC, setTotalCountAC, unfollowAC} from "../../../redux/friends-reducer";
+import {
+    followAC,
+    setCurrentPageAC,
+    setFriendsAC, setIsFriendsLoadingAC,
+    setIsPagesLoadingAC,
+    setTotalCountAC,
+    unfollowAC
+} from "../../../redux/friends-reducer";
 import React, {Component} from "react";
 import axios from "axios";
 import Friends from "./Friends";
@@ -8,38 +15,55 @@ class FriendsAPIComponent extends Component {
 
 
     componentDidMount() {
+        try {
+            this.props.setIsFriendsLoading(true)
+            this.props.setIsPagesLoading(true)
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((response) => {
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users/?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((response) => {
 
-            this.props.setFriends(response.data.items)
+                this.props.setFriends(response.data.items)
 
-
-            this.props.setTotalCount(response.data.totalCount)
-        })
-
-
+                this.props.setTotalCount(response.data.totalCount)
+            }).finally(()=>{
+                this.props.setIsFriendsLoading(false)
+                this.props.setIsPagesLoading(false)
+            })
+        }
+        catch (error){
+            console.log(error)
+        }
     }
 
 
     onChangePage = (page) => {
         this.props.setCurrentPage(page)
 
+        try {
+            this.props.setIsFriendsLoading(true)
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?page=${page}&count=${this.props.pageSize}`).then((response) => {
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users/?page=${page}&count=${this.props.pageSize}`).then((response) => {
 
-            this.props.setFriends(response.data.items)
+                this.props.setFriends(response.data.items)
 
-        })
+            }).finally(() => this.props.setIsFriendsLoading(false))
+        }
+        catch (e) {
+            console.log(e)
+        }
+
     }
 
 
     render() {
 
-
         return (
             <Friends onChangePage={this.onChangePage} friends={this.props.friends} follow={this.props.follow}
                      unfollow={this.props.unfollow} currentPage={this.props.currentPage}
-                     totalCount={this.props.totalCount} pageSize={this.props.pageSize}></Friends>
+                     totalCount={this.props.totalCount} pageSize={this.props.pageSize}
+                     isPagesLoading = {this.props.isPagesLoading}
+                     isFriendsLoading = {this.props.isFriendsLoading}
+            >
+            </Friends>
         );
     }
 }
@@ -51,6 +75,8 @@ let mapStateToProps = (state)=>{
         pageSize: state.friends.pageSize,
         totalCount: state.friends.totalCount,
         currentPage: state.friends.currentPage,
+        isPagesLoading: state.friends.isPagesLoading,
+        isFriendsLoading: state.friends.isFriendsLoading,
     }
 }
 
@@ -60,7 +86,9 @@ let mapStateToDispatch = (dispatch)=>{
         unfollow: (userId)=> dispatch(unfollowAC(userId)),
         setFriends: (friends)=> dispatch(setFriendsAC(friends)),
         setCurrentPage: (page)=> dispatch(setCurrentPageAC(page)),
-        setTotalCount: (count)=> dispatch(setTotalCountAC(count))
+        setTotalCount: (count)=> dispatch(setTotalCountAC(count)),
+        setIsPagesLoading: (flag)=> dispatch(setIsPagesLoadingAC(flag)),
+        setIsFriendsLoading: (flag)=> dispatch(setIsFriendsLoadingAC(flag))
     }
 }
 
