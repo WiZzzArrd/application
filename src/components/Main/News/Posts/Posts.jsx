@@ -30,7 +30,7 @@ let inputRef  = useRef()
 
 
     return (
-        <div className={style.content}>
+        <section className={style.content}>
             <div  className={style.form}>
                 <input ref={inputRef} type='text' placeholder='Что нового?'
                     value={news.postText}
@@ -40,7 +40,7 @@ let inputRef  = useRef()
             </div>
 
             {postData}
-        </div>
+        </section>
     );
 }
 

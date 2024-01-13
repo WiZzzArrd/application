@@ -1,11 +1,11 @@
 import {connect} from "react-redux";
 import {
-    followAC,
-    setCurrentPageAC,
-    setFriendsAC, setIsFriendsLoadingAC,
-    setIsPagesLoadingAC,
-    setTotalCountAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setFriends, setIsFriendsLoading,
+    setIsPagesLoading,
+    setTotalCount,
+    unfollow
 } from "../../../redux/friends-reducer";
 import React, {Component} from "react";
 import axios from "axios";
@@ -23,7 +23,7 @@ class FriendsAPIComponent extends Component {
 
                 this.props.setFriends(response.data.items)
 
-                this.props.setTotalCount(response.data.totalCount)
+                this.props.setTotalCount(response.data.totalCount )
             }).finally(()=>{
                 this.props.setIsFriendsLoading(false)
                 this.props.setIsPagesLoading(false)
@@ -80,20 +80,15 @@ let mapStateToProps = (state)=>{
     }
 }
 
-let mapStateToDispatch = (dispatch)=>{
-    return {
-        follow: (userId)=> dispatch(followAC(userId)),
-        unfollow: (userId)=> dispatch(unfollowAC(userId)),
-        setFriends: (friends)=> dispatch(setFriendsAC(friends)),
-        setCurrentPage: (page)=> dispatch(setCurrentPageAC(page)),
-        setTotalCount: (count)=> dispatch(setTotalCountAC(count)),
-        setIsPagesLoading: (flag)=> dispatch(setIsPagesLoadingAC(flag)),
-        setIsFriendsLoading: (flag)=> dispatch(setIsFriendsLoadingAC(flag))
-    }
-}
 
-
-
-let FriendsContainer = connect(mapStateToProps, mapStateToDispatch)(FriendsAPIComponent);
+let FriendsContainer = connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setFriends,
+    setCurrentPage,
+    setTotalCount,
+    setIsPagesLoading,
+    setIsFriendsLoading,
+})(FriendsAPIComponent);
 
 export default  FriendsContainer;

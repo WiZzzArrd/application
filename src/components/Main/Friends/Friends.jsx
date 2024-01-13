@@ -30,7 +30,7 @@ const Friends = (props) => {
 
 
     return (
-        <div className={style.wrap}>
+        <section className={style.wrap}>
             <div className="search friends__search">
                 <input type="text" placeholder={"Поиск"}/>
             </div>
@@ -46,7 +46,7 @@ const Friends = (props) => {
                     friends
                 }
             </div>
-        </div>
+        </section>
     );
 };
 

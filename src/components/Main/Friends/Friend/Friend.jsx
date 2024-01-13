@@ -1,6 +1,7 @@
 import React from 'react';
 import style from "./friend.module.css";
 import user from "../../../../assets/users/1.png";
+import {NavLink} from "react-router-dom";
 
 
 const Friend = ({ userName, id, userInfo, followed, avatar, follow, unfollow} ) => {
@@ -18,11 +19,13 @@ const Friend = ({ userName, id, userInfo, followed, avatar, follow, unfollow} ) 
     return (
         <div className={style.friend}>
             <div className={style.logo}>
-                <img width={90} height={90} src={avatar.small || user} alt="user"/>
+                <NavLink to = {`/profile/${id}`}  >
+                  <img width={90} height={90} src={avatar.small || user} alt="user"/>
+                </NavLink>
             </div>
             <div className={style.infoblock}>
                 <div className={style.info}>
-                    <a href="#">{userName}</a>
+                    <NavLink  to = {`/profile/${id}`}>{userName}</NavLink>
                     <p>{userInfo}</p>
                 </div>
                 <div className={style.actions}>
