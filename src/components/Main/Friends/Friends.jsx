@@ -6,7 +6,6 @@ import Loader from "../../../UI/Loader/Loader";
 const Friends = (props) => {
 
 
-
     let pagesCount = Math.ceil(props.totalCount / props.pageSize);
 
     let pages = [];
@@ -24,13 +23,16 @@ const Friends = (props) => {
     let friends = props.friends.map((friend) => {
         return <Friend key={friend.id} id={friend.id} userName={friend.name} userInfo={friend.status}
                        followed={friend.followed} avatar={friend.photos} follow={props.follow}
-                       unfollow={props.unfollow}></Friend>
+                       unfollow={props.unfollow}
+                       followingInProgress = {props.followingInProgress}
+                       setFollowingInProgress = {props.setFollowingInProgress}
+        ></Friend>
     })
 
 
 
     return (
-        <div className={style.wrap}>
+        <section className={style.wrap}>
             <div className="search friends__search">
                 <input type="text" placeholder={"Поиск"}/>
             </div>
@@ -46,7 +48,7 @@ const Friends = (props) => {
                     friends
                 }
             </div>
-        </div>
+        </section>
     );
 };
 

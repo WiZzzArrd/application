@@ -1,0 +1,4 @@
+.contacts:not(>p), .resume:not(>p){
+    word-break: break-word;
+    width: 30%;
+}

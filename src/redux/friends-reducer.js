@@ -5,6 +5,7 @@ const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
 const SET_TOTAL_COUNT = "SET-TOTAL-COUNT";
 const SET_IS_PAGES_LOADING = "SET-IS-PAGES-LOADING";
 const SET_IS_FRIENDS_LOADING = "SET-IS-FRIENDS-LOADING";
+const SET_FOLLOWING_IN_PROGRESS = "SET-FOLLOWING-IN-PROGRESS"
 
 let initialState = {
     friendsItems: [],
@@ -13,54 +14,63 @@ let initialState = {
     currentPage: 1,
     isPagesLoading: false,
     isFriendsLoading: false,
+    followingInProgress: [] ,
 }
 
-export const followAC = (userId)=>{
+export const follow = (userId)=>{
     return {
         type: FOLLOW,
         userId
     }
 }
 
-export const unfollowAC = (userId)=>{
+export const unfollow = (userId)=>{
     return {
         type: UNFOLLOW,
         userId
     }
 }
 
-export const setFriendsAC = (friends)=>{
+export const setFriends = (friends)=>{
     return {
         type: SET_FRIENDS,
         friends,
     }
 }
 
-export const setCurrentPageAC = (page)=>{
+export const setCurrentPage = (page)=>{
     return {
         type: SET_CURRENT_PAGE,
         page,
     }
 }
 
-export const setTotalCountAC = (count)=>{
+export const setTotalCount = (count)=>{
     return {
         type: SET_TOTAL_COUNT,
         count,
     }
 }
 
-export const setIsPagesLoadingAC = (flag)=>{
+export const setIsPagesLoading = (flag)=>{
     return {
         type: SET_IS_PAGES_LOADING,
         flag,
     }
 }
 
-export const setIsFriendsLoadingAC= (flag)=>{
+export const setIsFriendsLoading= (flag)=>{
     return {
         type: SET_IS_FRIENDS_LOADING,
         flag,
+    }
+}
+
+export const setFollowingInProgress = (isLoading, id)=>{
+    return {
+        type: SET_FOLLOWING_IN_PROGRESS,
+        isLoading,
+        id,
     }
 }
 
@@ -95,7 +105,6 @@ const friendsReducer = (state = initialState, action) => {
 
         case SET_FRIENDS: {
             return {...state, friendsItems:action.friends}
-            break
         }
 
         case SET_CURRENT_PAGE:{
@@ -103,7 +112,7 @@ const friendsReducer = (state = initialState, action) => {
         }
 
         case SET_TOTAL_COUNT:{
-            return  {...state, totalCount: action.count / 100}
+            return  {...state, totalCount: action.count /100}
         }
 
         case SET_IS_PAGES_LOADING:{
@@ -114,6 +123,13 @@ const friendsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFriendsLoading: action.flag,
+            }
+        }
+
+        case SET_FOLLOWING_IN_PROGRESS:{
+            return {
+                ...state,
+                followingInProgress: action.isLoading ? [...state.followingInProgress, action.id] : state.followingInProgress.filter(uId=> uId !== action.id)
             }
         }
 

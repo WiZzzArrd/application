@@ -1,15 +1,15 @@
 import {connect} from "react-redux";
 import {
-    followAC,
-    setCurrentPageAC,
-    setFriendsAC, setIsFriendsLoadingAC,
-    setIsPagesLoadingAC,
-    setTotalCountAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setFriends, setIsFriendsLoading,
+    setIsPagesLoading,
+    setTotalCount, setFollowingInProgress,
+    unfollow
 } from "../../../redux/friends-reducer";
 import React, {Component} from "react";
-import axios from "axios";
 import Friends from "./Friends";
+import { usersAPI} from "../../../api/api";
 
 class FriendsAPIComponent extends Component {
 
@@ -19,17 +19,16 @@ class FriendsAPIComponent extends Component {
             this.props.setIsFriendsLoading(true)
             this.props.setIsPagesLoading(true)
 
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users/?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((response) => {
+      usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
 
-                this.props.setFriends(response.data.items)
+                this.props.setFriends(data.items)
 
-                this.props.setTotalCount(response.data.totalCount)
-            }).finally(()=>{
+                this.props.setTotalCount(data.totalCount)
+            }).finally(() => {
                 this.props.setIsFriendsLoading(false)
                 this.props.setIsPagesLoading(false)
             })
-        }
-        catch (error){
+        } catch (error) {
             console.log(error)
         }
     }
@@ -41,13 +40,12 @@ class FriendsAPIComponent extends Component {
         try {
             this.props.setIsFriendsLoading(true)
 
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users/?page=${page}&count=${this.props.pageSize}`).then((response) => {
+            usersAPI.getUsers(page, this.props.pageSize).then((data) => {
 
-                this.props.setFriends(response.data.items)
+                this.props.setFriends(data.items)
 
             }).finally(() => this.props.setIsFriendsLoading(false))
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e)
         }
 
@@ -60,8 +58,10 @@ class FriendsAPIComponent extends Component {
             <Friends onChangePage={this.onChangePage} friends={this.props.friends} follow={this.props.follow}
                      unfollow={this.props.unfollow} currentPage={this.props.currentPage}
                      totalCount={this.props.totalCount} pageSize={this.props.pageSize}
-                     isPagesLoading = {this.props.isPagesLoading}
-                     isFriendsLoading = {this.props.isFriendsLoading}
+                     isPagesLoading={this.props.isPagesLoading}
+                     isFriendsLoading={this.props.isFriendsLoading}
+                     setFollowingInProgress = {this.props.setFollowingInProgress}
+                     followingInProgress = {this.props.followingInProgress}
             >
             </Friends>
         );
@@ -69,7 +69,7 @@ class FriendsAPIComponent extends Component {
 }
 
 
-let mapStateToProps = (state)=>{
+let mapStateToProps = (state) => {
     return {
         friends: state.friends.friendsItems,
         pageSize: state.friends.pageSize,
@@ -77,23 +77,20 @@ let mapStateToProps = (state)=>{
         currentPage: state.friends.currentPage,
         isPagesLoading: state.friends.isPagesLoading,
         isFriendsLoading: state.friends.isFriendsLoading,
-    }
-}
-
-let mapStateToDispatch = (dispatch)=>{
-    return {
-        follow: (userId)=> dispatch(followAC(userId)),
-        unfollow: (userId)=> dispatch(unfollowAC(userId)),
-        setFriends: (friends)=> dispatch(setFriendsAC(friends)),
-        setCurrentPage: (page)=> dispatch(setCurrentPageAC(page)),
-        setTotalCount: (count)=> dispatch(setTotalCountAC(count)),
-        setIsPagesLoading: (flag)=> dispatch(setIsPagesLoadingAC(flag)),
-        setIsFriendsLoading: (flag)=> dispatch(setIsFriendsLoadingAC(flag))
+        followingInProgress: state.friends.followingInProgress,
     }
 }
 
 
+let FriendsContainer = connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setFriends,
+    setCurrentPage,
+    setTotalCount,
+    setIsPagesLoading,
+    setIsFriendsLoading,
+    setFollowingInProgress
+})(FriendsAPIComponent);
 
-let FriendsContainer = connect(mapStateToProps, mapStateToDispatch)(FriendsAPIComponent);
-
-export default  FriendsContainer;
+export default FriendsContainer;

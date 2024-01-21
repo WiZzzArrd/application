@@ -3,10 +3,11 @@ import Sidebar from "./Sidebar/Sidebar";
 import style from "./main.module.css";
 import DialogsContainer from "./Dialogs/DialogsContainer";
 import {Route,  Switch} from "react-router-dom";
-import Profile from "./Profile/Profile";
 import Settings from "./Settings/Settings";
 import Music from "./Music/Music";
 import FriendsContainer from "./Friends/FriendsContainer";
+import ProfileContainer from "./Profile/ProfileContainer";
+import Login from "../../Pages/Login/Login";
 
 
 function Main() {
@@ -17,11 +18,15 @@ function Main() {
       <Sidebar></Sidebar>
 
         <Switch>
+            <Route exact path = "/" render = {()=> <NewsContainer/> }></Route>
+
             <Route exact path = "/news" render = {()=> <NewsContainer/> }></Route>
 
             <Route  path = "/messages" render = {()=> <DialogsContainer/>}></Route>
 
-            <Route exact path = "/profile" component = {Profile}></Route>
+            <Route   path = "/profile/:userId?" component = {ProfileContainer}></Route>
+
+            <Route path = "/login" component = {Login}></Route>
 
             <Route exact path = "/settings" component = {Settings}></Route>
 

@@ -39,7 +39,7 @@ let initialState = {
             let messagesLength = state.chatItems.length - 1;
 
             let newMessage = {
-                id: state.chatItems[messagesLength].id + 1,
+                id: state.chatItems[messagesLength].id + 1 || 0,
                 message: action.message,
             }
 

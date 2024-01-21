@@ -12,6 +12,8 @@
     transition: all .2s;
 }
 
+
+
 .friend img{
     width: 90px;
     height: 90px;
@@ -59,4 +61,12 @@
     cursor: pointer;
 }
 
+.actions button:disabled{
+    background-color: gray;
+    color: black;
 
+}
+
+.actions button:disabled:hover{
+    cursor: not-allowed;
+}

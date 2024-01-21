@@ -1,32 +1,68 @@
 import React from 'react';
 import style from "./friend.module.css";
 import user from "../../../../assets/users/1.png";
+import {NavLink} from "react-router-dom";
+import {deleteFollow, postFollow} from "../../../../api/api";
 
 
-const Friend = ({ userName, id, userInfo, followed, avatar, follow, unfollow} ) => {
 
+const Friend = ({
+                    userName,
+                    id,
+                    userInfo,
+                    followed,
+                    avatar,
+                    follow,
+                    unfollow,
+                    setFollowingInProgress,
+                    followingInProgress
+                }) => {
 
 
     let addFriendButton = ""
+    let disabled = followingInProgress.some(friendId => friendId === id);
 
-    if(followed){
-        addFriendButton =  <button onClick={()=> unfollow(id) } href="#">Удалить из друзей</button>
-    }else{
-        addFriendButton =  <button onClick={()=> follow(id) } href="#">Добавить в друзья</button>
+    if (followed) {
+        addFriendButton = <button disabled={disabled} onClick={() => {
+            setFollowingInProgress(true, id)
+            deleteFollow(id).then((response) => {
+                if (response.resultCode === 0) {
+                    console.log("Удален из друзей")
+                    unfollow(id)
+                }
+            }).catch(() => console.error("При удалении произошла ошибка")).finally(() => {
+                setFollowingInProgress(false, id)
+            })
+
+        }}>Удалить из друзей</button>
+    } else {
+        addFriendButton = <button  disabled={disabled} onClick={() => {
+            setFollowingInProgress(true, id)
+            postFollow(id).then((response) => {
+                if (response.resultCode === 0) {
+                    console.log("Добавлен в друзья")
+                    follow(id)
+                }
+            }).finally(() => {
+            setFollowingInProgress(false, id)
+            })
+        }}>Добавить в друзья</button>
     }
 
     return (
         <div className={style.friend}>
             <div className={style.logo}>
-                <img width={90} height={90} src={avatar.small || user} alt="user"/>
+                <NavLink to={`/profile/${id}`}>
+                    <img width={90} height={90} src={avatar.small || user} alt="user"/>
+                </NavLink>
             </div>
             <div className={style.infoblock}>
                 <div className={style.info}>
-                    <a href="#">{userName}</a>
+                    <NavLink to={`/profile/${id}`}>{userName}</NavLink>
                     <p>{userInfo}</p>
                 </div>
                 <div className={style.actions}>
-                    {addFriendButton}
+                    { addFriendButton}
                 </div>
             </div>
         </div>
