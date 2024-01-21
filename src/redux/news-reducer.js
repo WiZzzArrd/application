@@ -40,7 +40,7 @@ const newsReducer = (state = initialState, action) => {
             let postsLength = state.postItems.length - 1
 
             let postItem = {
-                id: state.postItems[postsLength].id + 1,
+                id: state.postItems[postsLength].id + 1 || 0,
                 message: action.post.message || "...",
                 likeCount: action.post?.likeCount || 0,
                 comment: action.post?.comment || 0,

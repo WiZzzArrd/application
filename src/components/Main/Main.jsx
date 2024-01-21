@@ -7,6 +7,7 @@ import Settings from "./Settings/Settings";
 import Music from "./Music/Music";
 import FriendsContainer from "./Friends/FriendsContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
+import Login from "../../Pages/Login/Login";
 
 
 function Main() {
@@ -24,6 +25,8 @@ function Main() {
             <Route  path = "/messages" render = {()=> <DialogsContainer/>}></Route>
 
             <Route   path = "/profile/:userId?" component = {ProfileContainer}></Route>
+
+            <Route path = "/login" component = {Login}></Route>
 
             <Route exact path = "/settings" component = {Settings}></Route>
 

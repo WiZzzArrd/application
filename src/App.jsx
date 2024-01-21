@@ -1,8 +1,7 @@
 import React from "react";
 import style from "./index.module.css";
-import Header from "./components/Header/Header";
-
 import Main from "./components/Main/Main";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 function App() {
@@ -10,7 +9,7 @@ function App() {
     return (
     <div className={style.app}>
       <div className={style.wrapper}>
-        <Header></Header>
+       <HeaderContainer/>
         <Main></Main>
       </div>
     </div>
