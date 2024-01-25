@@ -1,3 +1,5 @@
+import {authAPI, usersAPI} from "../api/api";
+
 const SET_IS_PAGE_LOADING = "SET-IS-PAGE-LOADING";
 const SET_USER_DATA = "SET-USER-DATA"
 
@@ -10,29 +12,33 @@ const initialState = {
 }
 
 
-export const setIsPageLoading = (flag)=>{
-    return {
-        type:SET_IS_PAGE_LOADING,
-        flag,
+export const setIsPageLoading = (flag) => ({type: SET_IS_PAGE_LOADING, flag})
+
+export const setUserData = (userId, email, login) => ({
+    type: SET_USER_DATA, data: {
+        userId,
+        email,
+        login,
+    },
+})
+
+export const getAuth = () => {
+    return (dispatch) => {
+        dispatch(setIsPageLoading(true))
+        authAPI.me().then((response) => {
+            if (response.resultCode === 0) {
+                debugger
+                const {email, id: userId, login} = response.data;
+                dispatch(setUserData(userId, email, login))
+            }
+        }).finally(()=>{
+            dispatch(setIsPageLoading(false))
+        })
     }
 }
 
-export const setUserData = (userId, email, login)=>{
 
-
-    return {
-        type: SET_USER_DATA,
-        data: {
-            userId,
-            email,
-            login,
-        },
-
-    }
-}
-
-
-export const authReducer = (state=initialState, action)=>{
+export const authReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
@@ -43,7 +49,7 @@ export const authReducer = (state=initialState, action)=>{
             }
         }
 
-        case SET_USER_DATA:{
+        case SET_USER_DATA: {
             return {
                 ...state,
                 ...action.data,
@@ -52,7 +58,7 @@ export const authReducer = (state=initialState, action)=>{
         }
 
 
-        default:{
+        default: {
             return state
         }
 

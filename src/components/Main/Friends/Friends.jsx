@@ -7,7 +7,6 @@ const Friends = (props) => {
 
 
     let pagesCount = Math.ceil(props.totalCount / props.pageSize);
-
     let pages = [];
 
     for (let i = 1; i <= pagesCount ; i++) {
@@ -22,10 +21,8 @@ const Friends = (props) => {
 
     let friends = props.friends.map((friend) => {
         return <Friend key={friend.id} id={friend.id} userName={friend.name} userInfo={friend.status}
-                       followed={friend.followed} avatar={friend.photos} follow={props.follow}
-                       unfollow={props.unfollow}
+                       followed={friend.followed} avatar={friend.photos} follow={props.follow} unfollow = {props.unfollow}
                        followingInProgress = {props.followingInProgress}
-                       setFollowingInProgress = {props.setFollowingInProgress}
         ></Friend>
     })
 

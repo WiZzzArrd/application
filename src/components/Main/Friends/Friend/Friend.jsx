@@ -2,9 +2,6 @@ import React from 'react';
 import style from "./friend.module.css";
 import user from "../../../../assets/users/1.png";
 import {NavLink} from "react-router-dom";
-import {deleteFollow, postFollow} from "../../../../api/api";
-
-
 
 const Friend = ({
                     userName,
@@ -14,38 +11,22 @@ const Friend = ({
                     avatar,
                     follow,
                     unfollow,
-                    setFollowingInProgress,
                     followingInProgress
                 }) => {
+
 
 
     let addFriendButton = ""
     let disabled = followingInProgress.some(friendId => friendId === id);
 
+
     if (followed) {
         addFriendButton = <button disabled={disabled} onClick={() => {
-            setFollowingInProgress(true, id)
-            deleteFollow(id).then((response) => {
-                if (response.resultCode === 0) {
-                    console.log("Удален из друзей")
-                    unfollow(id)
-                }
-            }).catch(() => console.error("При удалении произошла ошибка")).finally(() => {
-                setFollowingInProgress(false, id)
-            })
-
+            unfollow(id)
         }}>Удалить из друзей</button>
     } else {
         addFriendButton = <button  disabled={disabled} onClick={() => {
-            setFollowingInProgress(true, id)
-            postFollow(id).then((response) => {
-                if (response.resultCode === 0) {
-                    console.log("Добавлен в друзья")
-                    follow(id)
-                }
-            }).finally(() => {
-            setFollowingInProgress(false, id)
-            })
+            follow(id)
         }}>Добавить в друзья</button>
     }
 

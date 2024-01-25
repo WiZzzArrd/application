@@ -1,54 +1,23 @@
 import {connect} from "react-redux";
 import {
-    follow,
-    setCurrentPage,
-    setFriends, setIsFriendsLoading,
-    setIsPagesLoading,
-    setTotalCount, setFollowingInProgress,
-    unfollow
+    setFollowingInProgress,
+     getFriends
 } from "../../../redux/friends-reducer";
 import React, {Component} from "react";
 import Friends from "./Friends";
-import { usersAPI} from "../../../api/api";
+import {follow, unfollow} from "../../../redux/friends-reducer";
+
 
 class FriendsAPIComponent extends Component {
 
 
     componentDidMount() {
-        try {
-            this.props.setIsFriendsLoading(true)
-            this.props.setIsPagesLoading(true)
-
-      usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
-
-                this.props.setFriends(data.items)
-
-                this.props.setTotalCount(data.totalCount)
-            }).finally(() => {
-                this.props.setIsFriendsLoading(false)
-                this.props.setIsPagesLoading(false)
-            })
-        } catch (error) {
-            console.log(error)
-        }
+        this.props.getFriendsThunkCreator(this.props.currentPage, this.props.pageSize);
     }
 
 
     onChangePage = (page) => {
-        this.props.setCurrentPage(page)
-
-        try {
-            this.props.setIsFriendsLoading(true)
-
-            usersAPI.getUsers(page, this.props.pageSize).then((data) => {
-
-                this.props.setFriends(data.items)
-
-            }).finally(() => this.props.setIsFriendsLoading(false))
-        } catch (e) {
-            console.log(e)
-        }
-
+        this.props.getFriendsThunkCreator(page, this.props.pageSize);
     }
 
 
@@ -56,11 +25,11 @@ class FriendsAPIComponent extends Component {
 
         return (
             <Friends onChangePage={this.onChangePage} friends={this.props.friends} follow={this.props.follow}
-                     unfollow={this.props.unfollow} currentPage={this.props.currentPage}
+                   currentPage={this.props.currentPage}
+                     unfollow = {this.props.unfollow}
                      totalCount={this.props.totalCount} pageSize={this.props.pageSize}
                      isPagesLoading={this.props.isPagesLoading}
                      isFriendsLoading={this.props.isFriendsLoading}
-                     setFollowingInProgress = {this.props.setFollowingInProgress}
                      followingInProgress = {this.props.followingInProgress}
             >
             </Friends>
@@ -84,13 +53,9 @@ let mapStateToProps = (state) => {
 
 let FriendsContainer = connect(mapStateToProps, {
     follow,
+    setFollowingInProgress,
     unfollow,
-    setFriends,
-    setCurrentPage,
-    setTotalCount,
-    setIsPagesLoading,
-    setIsFriendsLoading,
-    setFollowingInProgress
+    getFriendsThunkCreator: getFriends,
 })(FriendsAPIComponent);
 
 export default FriendsContainer;

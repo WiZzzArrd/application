@@ -1,14 +1,10 @@
 import {connect} from "react-redux";
 import React, {Component} from 'react';
 import Profile from "./Profile";
-import {setFriendProfile, setIsProfileLoading} from "../../../redux/profile-reducer";
-import axios from "axios";
+import {getProfile} from "../../../redux/profile-reducer";
 import { withRouter} from "react-router-dom";
 
 class ProfileAPIContainer extends Component {
-
-
-
 
     componentDidMount() {
 
@@ -18,27 +14,11 @@ class ProfileAPIContainer extends Component {
                 userId = "2";
             }
 
-            this.props.setIsProfileLoading(true)
-
-            axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then((response)=>{
-
-
-
-
-                this.props.setFriendProfile(response.data)
-
-            }).catch((e)=>{
-                console.log(e)
-            }).finally(()=>{
-                this.props.setIsProfileLoading(false)
-            })
+            this.props.getProfile(userId)
     }
 
 
-
-
     render() {
-
 
         return (
             <Profile {...this.props}></Profile>
@@ -58,8 +38,7 @@ let withRouterComponent = withRouter(ProfileAPIContainer)
 
 
 const ProfileContainer = connect(mapStateToProps, {
-    setFriendProfile,
-    setIsProfileLoading,
+    getProfile,
 })(withRouterComponent);
 
 

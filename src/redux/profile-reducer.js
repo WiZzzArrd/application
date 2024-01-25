@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const SET_FRIEND_PROFILE = "SET-FRIEND-PROFILE";
 const SET_IS_PROFILE_LOADING = "SET-IS-PROFILE-LOADING";
 
@@ -22,13 +24,28 @@ const initialState = {
 
 }
 
-export const setFriendProfile = (profile)=>{
+export const setFriendProfile = (profile) => {
     return {type: SET_FRIEND_PROFILE, profile}
 
 }
 
-export const setIsProfileLoading = (flag)=>{
+export const setIsProfileLoading = (flag) => {
     return {type: SET_IS_PROFILE_LOADING, flag}
+}
+
+
+export const getProfile = (userId) => {
+    return (dispatch) => {
+        dispatch(setIsProfileLoading(true))
+
+        usersAPI.getProfile(userId).then((data) => {
+            dispatch(setFriendProfile(data))
+        }).catch((e) => {
+            console.log(e)
+        }).finally(() => {
+            dispatch(setIsProfileLoading(false))
+        })
+    }
 }
 
 export const profileReducer = (state = initialState, action) => {
@@ -36,7 +53,7 @@ export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
 
 
-        case SET_FRIEND_PROFILE:{
+        case SET_FRIEND_PROFILE: {
             return {...state, info: {...action.profile}}
         }
 
@@ -44,7 +61,7 @@ export const profileReducer = (state = initialState, action) => {
             return {...state, isProfileLoading: action.flag}
         }
 
-        default:{
+        default: {
             return state;
         }
     }

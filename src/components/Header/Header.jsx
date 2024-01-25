@@ -1,10 +1,17 @@
 import style from "./header.module.css";
 import vk from "../../assets/img/vk.png";
 import {NavLink} from "react-router-dom";
+import Loader from "../../UI/Loader/Loader";
 
 function Header(props) {
 
-  console.log(props)
+    let loginData = ""
+
+    if(props.isAuth){
+      loginData =  props.login
+    }else{
+      loginData =  <NavLink to ="/login">Login</NavLink>
+    }
 
   return (
     <header className={style.header}>
@@ -20,13 +27,7 @@ function Header(props) {
 
 
         <div className={style.login}>
-          {props.isAuth ?
-              props.login
-                        :
-              <NavLink to ="/login">Login</NavLink>
-
-          }
-
+            {props.isLoading ? <Loader/> : loginData}
         </div>
       </div>
     </header>
