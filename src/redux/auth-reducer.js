@@ -1,7 +1,8 @@
-import {authAPI, usersAPI} from "../api/api";
+import {authAPI} from "../api/api";
 
 const SET_IS_PAGE_LOADING = "SET-IS-PAGE-LOADING";
 const SET_USER_DATA = "SET-USER-DATA"
+
 
 const initialState = {
     userId: null,
@@ -22,12 +23,12 @@ export const setUserData = (userId, email, login) => ({
     },
 })
 
+
 export const getAuth = () => {
     return (dispatch) => {
         dispatch(setIsPageLoading(true))
         authAPI.me().then((response) => {
             if (response.resultCode === 0) {
-                debugger
                 const {email, id: userId, login} = response.data;
                 dispatch(setUserData(userId, email, login))
             }
