@@ -31,12 +31,17 @@ class ProfileAPIContainer extends Component {
 let AuthRedirectComponent = withAuthRedirect(ProfileAPIContainer)
 
 
+
+
 let mapStateToProps = (state)=>{
     return {
         profile: state.profile,
-        isAuth: state.auth.isAuth,
     }
 }
+
+
+
+
 
 
 let withRouterComponent = withRouter(AuthRedirectComponent)

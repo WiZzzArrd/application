@@ -8,7 +8,6 @@ import withAuthRedirect from "../../../hoc/withAuthRedirect";
 let mapStateToProps = (state)=>{
     return {
         messages: state.messages,
-        isAuth: state.auth.isAuth,
     }
 }
 let mapStateToDispatch = (dispatch)=>{

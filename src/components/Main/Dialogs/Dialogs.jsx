@@ -5,7 +5,7 @@ import Dialog from "./Dialog/Dialog";
 
 
 
-const DialogsContainer = (props) => {
+const Dialogs = (props) => {
 
 
 
@@ -17,4 +17,4 @@ const DialogsContainer = (props) => {
     );
 };
 
-export default DialogsContainer;
+export default Dialogs;

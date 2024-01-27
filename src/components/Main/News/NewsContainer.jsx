@@ -1,5 +1,4 @@
 import Posts from "./Posts/Posts";
-import style from "./content.module.css";
 import {addPostActionCreator, changePostTextActionCreator} from "../../../redux/news-reducer";
 import {connect} from "react-redux";
 
@@ -8,7 +7,8 @@ import {connect} from "react-redux";
 
 let mapStateToProps = (state) => {
     return {
-        news: state.news
+        news: state.news,
+        isAuth: state.auth.isAuth,
     }
 };
 

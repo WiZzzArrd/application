@@ -1,23 +1,25 @@
 import {connect} from "react-redux";
 import {
     setFollowingInProgress,
-     getFriends
+    getFriends
 } from "../../../redux/friends-reducer";
 import React, {Component} from "react";
 import Friends from "./Friends";
 import {follow, unfollow} from "../../../redux/friends-reducer";
+import withAuthRedirect from "../../../hoc/withAuthRedirect";
+
 
 
 class FriendsAPIComponent extends Component {
 
 
     componentDidMount() {
-        this.props.getFriendsThunkCreator(this.props.currentPage, this.props.pageSize);
+        this.props.getFriends(this.props.currentPage, this.props.pageSize);
     }
 
 
     onChangePage = (page) => {
-        this.props.getFriendsThunkCreator(page, this.props.pageSize);
+        this.props.getFriends(page, this.props.pageSize);
     }
 
 
@@ -25,12 +27,12 @@ class FriendsAPIComponent extends Component {
 
         return (
             <Friends onChangePage={this.onChangePage} friends={this.props.friends} follow={this.props.follow}
-                   currentPage={this.props.currentPage}
-                     unfollow = {this.props.unfollow}
+                     currentPage={this.props.currentPage}
+                     unfollow={this.props.unfollow}
                      totalCount={this.props.totalCount} pageSize={this.props.pageSize}
                      isPagesLoading={this.props.isPagesLoading}
                      isFriendsLoading={this.props.isFriendsLoading}
-                     followingInProgress = {this.props.followingInProgress}
+                     followingInProgress={this.props.followingInProgress}
             >
             </Friends>
         );
@@ -50,12 +52,14 @@ let mapStateToProps = (state) => {
     }
 }
 
+let withAuthRedirectComponent = withAuthRedirect(FriendsAPIComponent)
+
 
 let FriendsContainer = connect(mapStateToProps, {
     follow,
     setFollowingInProgress,
     unfollow,
-    getFriendsThunkCreator: getFriends,
-})(FriendsAPIComponent);
+    getFriends,
+})(withAuthRedirectComponent);
 
 export default FriendsContainer;
