@@ -2,11 +2,14 @@ import React from 'react';
 import style from "./resume.module.css";
 
 const Resume = (props) => {
+
+    console.log(props)
+
     return (
         <div className={style.resume}>
             <p>Резюме</p>
             <ul>
-                <li>Статус: {props.profile.info.lookingForAJob || <span>Не указано</span>}</li>
+                <li>Статус: {props.profile.info.lookingForAJob && "В поиске работы" || <span>Не указано</span>}</li>
                 <li>Описание: {props.profile.info.lookingForAJobDescription || <span>Не указано</span>} </li>
             </ul>
         </div>
