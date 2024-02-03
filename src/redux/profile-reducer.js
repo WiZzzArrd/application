@@ -1,7 +1,8 @@
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 
 const SET_FRIEND_PROFILE = "SET-FRIEND-PROFILE";
 const SET_IS_PROFILE_LOADING = "SET-IS-PROFILE-LOADING";
+const SET_STATUS = "SET-STATUS";
 
 const initialState = {
     info: {
@@ -21,7 +22,7 @@ const initialState = {
         lookingForAJobDescription: null,
     },
     isProfileLoading: true,
-
+    status: "",
 }
 
 export const setFriendProfile = (profile) => {
@@ -31,6 +32,10 @@ export const setFriendProfile = (profile) => {
 
 export const setIsProfileLoading = (flag) => {
     return {type: SET_IS_PROFILE_LOADING, flag}
+}
+
+export const setStatus = (status)=>{
+    return {type:SET_STATUS,  status}
 }
 
 
@@ -48,6 +53,27 @@ export const getProfile = (userId) => {
     }
 }
 
+export const getStatus = (id)=>{
+    return (dispatch)=>{
+        profileAPI.getStatus(id).then(resp=>{
+            dispatch(setStatus(resp.data))
+        });
+    }
+}
+
+export const    updateStatus = (status)=>{
+    return (dispatch)=>{
+        profileAPI.updateStatus(status).then(resp=>{
+            if(resp.data.resultCode === 0){
+                dispatch(setStatus(status))
+            }else{
+                console.log("error")
+            }
+        })
+    }
+}
+
+
 export const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
@@ -60,6 +86,12 @@ export const profileReducer = (state = initialState, action) => {
         case SET_IS_PROFILE_LOADING: {
             return {...state, isProfileLoading: action.flag}
         }
+
+        case SET_STATUS:{
+            return  {...state, status: action.status}
+        }
+
+
 
         default: {
             return state;

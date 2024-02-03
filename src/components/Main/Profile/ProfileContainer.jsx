@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import React, {Component} from 'react';
 import Profile from "./Profile";
-import {getProfile} from "../../../redux/profile-reducer";
+import {getProfile, getStatus, updateStatus} from "../../../redux/profile-reducer";
 import {compose} from "redux";
 
 class ProfileAPIContainer extends Component {
@@ -15,6 +15,7 @@ class ProfileAPIContainer extends Component {
             }
 
             this.props.getProfile(userId)
+            this.props.getStatus(userId)
     }
 
 
@@ -28,6 +29,7 @@ class ProfileAPIContainer extends Component {
 let mapStateToProps = (state)=>{
     return {
         profile: state.profile,
+        status: state.profile.status,
     }
 }
 
@@ -35,6 +37,8 @@ let mapStateToProps = (state)=>{
 
 let ProfileContainer = compose(connect(mapStateToProps, {
     getProfile,
+    getStatus,
+    updateStatus,
 }))(ProfileAPIContainer)
 
 

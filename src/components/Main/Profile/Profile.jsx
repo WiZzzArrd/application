@@ -5,6 +5,7 @@ import Loader from "../../../UI/Loader/Loader";
 import Resume from "./Resume/Resume";
 import Contacts from "./Contacts/Contacts";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
+
 const Profile = (props) => {
 
 
@@ -22,7 +23,8 @@ const Profile = (props) => {
                 </div>
                 <div className={style.info}>
                     <p>{props.profile.info.fullName || "No Name"}</p>
-                    <ProfileStatus aboutMe = {props.profile.info.aboutMe}/>
+                    <ProfileStatus updateStatus = {props.updateStatus} status = {props.status } aboutMe = {props.profile.info.aboutMe}
+                    />
                 </div>
             </div>
             <div className={style.infoblock}>

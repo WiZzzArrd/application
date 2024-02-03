@@ -3,34 +3,55 @@ import style from "./profileStatus.module.css"
 
 class ProfileStatus extends Component {
 
+
+
     state = {
         editMode: false,
+        status: this.props.status,
     }
 
-    activateEditMode(){
+    activateEditMode = ()=>{
         this.setState({
             editMode:true,
         })
     }
 
-    deactivateEditMode(){
+    deactivateEditMode=()=>{
         this.setState({
             editMode: false,
         })
+
+        this.props.updateStatus(this.state.status)
+    }
+
+    onStatusChange = (e)=>{
+        this.setState({
+            status: e.target.value,
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.status !== this.props.status){
+            this.setState({
+                state: this.props.state,
+            })
+        }
     }
 
     render() {
         return (
             <div>
                 {!this.state.editMode &&
-                    <div onDoubleClick={this.activateEditMode.bind(this)} className={style.aboutme}>
-                        <p>{this.props.aboutMe || ""}</p>
+                    <div onDoubleClick={this.activateEditMode} className={style.aboutme}>
+                        <p>{this.props.status || "----"}</p>
                     </div>
                 }
 
                 {this.state.editMode &&
                     <div className={"search"}>
-                    <input autoFocus={true} onBlur={this.deactivateEditMode.bind(this)} type={"text"} value={this.props.aboutMe}></input>
+                    <input autoFocus={true} onBlur={this.deactivateEditMode}
+                           onChange={(e)=>this.onStatusChange(e)}
+                           type={"text"} value={this.state.status}></input>
                     </div>
                 }
             </div>
