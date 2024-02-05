@@ -5,6 +5,7 @@ import friendsReducer from "./friends-reducer";
 import {profileReducer} from "./profile-reducer";
 import {authReducer} from "./auth-reducer";
 import {thunk} from "redux-thunk";
+import {reducer as formReducer} from "redux-form";
 
 let reducersBatch = combineReducers({
     news: newsReducer,
@@ -12,6 +13,7 @@ let reducersBatch = combineReducers({
     friends: friendsReducer,
     profile: profileReducer,
     auth: authReducer,
+    form: formReducer,
 });
 
 export let store = legacy_createStore(reducersBatch, applyMiddleware(thunk));
