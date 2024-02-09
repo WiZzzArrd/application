@@ -1,8 +1,6 @@
 import Posts from "./Posts/Posts";
-import {addPostActionCreator, changePostTextActionCreator} from "../../../redux/news-reducer";
+import {addPostActionCreator} from "../../../redux/news-reducer";
 import {connect} from "react-redux";
-
-
 
 
 let mapStateToProps = (state) => {
@@ -14,9 +12,6 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch)=>{
     return {
-        updatePostText: (text)=>{
-            dispatch(changePostTextActionCreator(text))
-        },
         addPost: (text)=>{
             dispatch(addPostActionCreator(text))
         },

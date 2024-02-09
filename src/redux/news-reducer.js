@@ -1,6 +1,4 @@
 export const ADD_POST = "ADD-POST";
-export const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
-
 
 export const addPostActionCreator = (message) => {
 
@@ -9,18 +7,8 @@ export const addPostActionCreator = (message) => {
         post: {
             message: message
         }
-
     }
 }
-
-export const changePostTextActionCreator = (text) => {
-
-    return {
-        type: CHANGE_POST_TEXT,
-        text: text
-    }
-}
-
 
 let initialState = {
     postItems: [{
@@ -30,7 +18,6 @@ let initialState = {
     }, {
         id: 3, message: 'Всем привет', likeCount: "10", comment: "35",
     }],
-    postText: "",
 }
 
 
@@ -46,12 +33,7 @@ const newsReducer = (state = initialState, action) => {
                 comment: action.post?.comment || 0,
             }
 
-            return  {...state, postItems: [...state.postItems, postItem], postText: ""}
-
-        }
-        case CHANGE_POST_TEXT: {
-            return  {...state, postText: action.text};
-
+            return  {...state, postItems: [...state.postItems, postItem]}
 
         }
         default : {

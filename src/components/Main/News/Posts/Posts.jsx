@@ -1,27 +1,15 @@
 import Post from "./Post/Post";
 import style from "./Posts.module.css";
-import {useRef} from "react";
+import PostsForm from "./PostsForm";
+import {reduxForm} from "redux-form";
 
 
+function Posts({news, addPost, isAuth}) {
 
 
-function Posts({news, updatePostText, addPost, isAuth}) {
-
-
-    let formData = "";
     let postData = "";
-    let inputRef  = useRef();
+    let   PostsReduxForm = reduxForm({form: "posts"})(PostsForm)
 
-    if(isAuth){
-
-     formData=   <div  className={style.form}>
-            <input ref={inputRef} type='text' placeholder='Что нового?'
-                   value={news.postText}
-                   onChange={onPostChange}
-            />
-            <button onClick={onAddPost}>Опубликовать</button>
-        </div>
-    }
 
 
     if(!news.postItems){
@@ -32,20 +20,16 @@ function Posts({news, updatePostText, addPost, isAuth}) {
         })
     }
 
-
-
-    function onPostChange(){
-        updatePostText(inputRef.current.value)
-    }
-
-    function onAddPost(){
-        addPost(inputRef.current.value)
+    function onAddPostHandler(props){
+       if(props.post){
+           addPost(props.post)
+       }
     }
 
 
     return (
         <section className={style.content}>
-            {formData}
+            {isAuth && <PostsReduxForm  onSubmit={onAddPostHandler}  />}
             {postData}
         </section>
     );

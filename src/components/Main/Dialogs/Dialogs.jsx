@@ -7,12 +7,10 @@ import Dialog from "./Dialog/Dialog";
 
 const Dialogs = (props) => {
 
-
-
     return (
         <section className={style.dialogs}>
-            <Dialog dialogItems = {props.messages.dialogItems} ></Dialog>
-            <Chat  addMessage = {props.addMessage} chatText = {props.messages.chatText}  changeMessage = {props.changeMessage} chatItems = {props.messages.chatItems}        ></Chat>
+            <Dialog dialogItems = {props.messages.dialogItems} />
+            <Chat  addMessage = {props.addMessage} chatItems = {props.messages.chatItems} />
         </section>
     );
 };

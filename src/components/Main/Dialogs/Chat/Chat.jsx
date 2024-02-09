@@ -1,13 +1,13 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import style from "./chat.module.css";
 import Message from "./Message";
-import send from "../../../../assets/icons/send.svg"
+import {reduxForm} from "redux-form";
+import ChatForm from "./ChatForm";
 
 
 
-const Chat = ({addMessage, chatItems , changeMessage, chatText}) => {
+const Chat = ({addMessage, chatItems }) => {
     let chatData = "";
-
 
     if(!chatItems){
         chatData = <p>Тут пока нет сообщений..."</p>
@@ -17,14 +17,12 @@ const Chat = ({addMessage, chatItems , changeMessage, chatText}) => {
         })
     }
 
-    const inputRef = useRef();
+    const ChatReduxForm = reduxForm({form: "chatForm"})(ChatForm)
 
-    function onAddMessage (){
-        addMessage(inputRef.current.value)
-    }
 
-    function onChangeMessage(){
-        changeMessage(inputRef.current.value)
+
+    function onAddMessageHandler(props){
+        addMessage(props.dialogMessage)
     }
 
 
@@ -32,15 +30,7 @@ const Chat = ({addMessage, chatItems , changeMessage, chatText}) => {
         <div className={style.chat}>
             {chatData}
             <div className={style.send}>
-                <div className="search">
-                    <input   ref={inputRef}
-                          placeholder="Напишите сообщение..." type="text"
-                           value = {chatText} onChange={onChangeMessage}
-                    />
-                </div>
-                <button onClick={onAddMessage} className={style.btn}>
-                {/*<img  onClick={onAddMessage} src={send} width={30} height={30} alt="send"/>*/}
-                </button>
+                <ChatReduxForm onSubmit={onAddMessageHandler}></ChatReduxForm>
             </div>
         </div>
     );

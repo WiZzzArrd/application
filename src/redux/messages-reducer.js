@@ -1,4 +1,3 @@
-export const UPDATE_MESSAGE = "UPDATE-MESSAGE";
 export const ADD_MESSAGE = "ADD-MESSAGE";
 
 export const addMessageActionCreator = (message)=>{
@@ -9,13 +8,6 @@ export const addMessageActionCreator = (message)=>{
     }
 }
 
-export const updateMessageActionCreator = (text)=>{
-
-    return {
-        type: UPDATE_MESSAGE,
-        text: text
-    }
-}
 
 let initialState = {
     dialogItems: [
@@ -29,7 +21,6 @@ let initialState = {
         {id: 3, message: "ok, have a good day"},
         {id: 4, message: ":)"},
     ],
-    chatText: "",
 }
 
 
@@ -45,10 +36,6 @@ let initialState = {
 
 
            return  {...state, chatItems: [...state.chatItems, newMessage], chatText: ""};
-
-        }
-        case UPDATE_MESSAGE: {
-            return {...state, chatText: action.text };
 
         }
         default : {
