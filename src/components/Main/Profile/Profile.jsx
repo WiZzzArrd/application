@@ -9,6 +9,7 @@ import ProfileStatus from "./ProfileStatus/ProfileStatus";
 const Profile = (props) => {
 
 
+
     if(props.profile.isProfileLoading){
         return ( <div className={style.loader}> <Loader ></Loader></div>)
     }

@@ -5,10 +5,19 @@ import Loader from "../../UI/Loader/Loader";
 
 function Header(props) {
 
+
     let loginData = ""
 
+    const logoutHandler = ()=>{
+        props.logout()
+    }
+
+
     if(props.isAuth){
-      loginData =  props.login
+      loginData = <>
+          {props.login}
+          <button onClick={logoutHandler} className={style.button}>logout</button>
+      </>
     }else{
       loginData =  <NavLink to ="/login">Login</NavLink>
     }

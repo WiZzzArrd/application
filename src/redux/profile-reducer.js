@@ -49,6 +49,8 @@ export const getProfile = (userId) => {
             console.log(e)
         }).finally(() => {
             dispatch(setIsProfileLoading(false))
+        }).catch(()=>{
+            console.log("error")
         })
     }
 }

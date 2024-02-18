@@ -3,7 +3,6 @@ import style from "./resume.module.css";
 
 const Resume = (props) => {
 
-    console.log(props)
 
     return (
         <div className={style.resume}>

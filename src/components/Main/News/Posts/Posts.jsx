@@ -21,6 +21,9 @@ function Posts({news, addPost, isAuth}) {
     }
 
     function onAddPostHandler(props){
+
+
+
        if(props.post){
            addPost(props.post)
        }

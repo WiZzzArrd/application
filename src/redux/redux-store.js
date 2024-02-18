@@ -6,6 +6,7 @@ import {profileReducer} from "./profile-reducer";
 import {authReducer} from "./auth-reducer";
 import {thunk} from "redux-thunk";
 import {reducer as formReducer} from "redux-form";
+import {appReducer} from "./app-reducer";
 
 let reducersBatch = combineReducers({
     news: newsReducer,
@@ -13,6 +14,7 @@ let reducersBatch = combineReducers({
     friends: friendsReducer,
     profile: profileReducer,
     auth: authReducer,
+    app: appReducer,
     form: formReducer,
 });
 

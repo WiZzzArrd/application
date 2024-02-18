@@ -44,5 +44,12 @@
   text-decoration: underline;
 }
 
+.button{
+  padding: 2px 7px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
 
 

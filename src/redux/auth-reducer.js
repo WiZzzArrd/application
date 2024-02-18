@@ -1,4 +1,5 @@
 import {authAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_IS_PAGE_LOADING = "SET-IS-PAGE-LOADING";
 const SET_USER_DATA = "SET-USER-DATA"
@@ -15,11 +16,12 @@ const initialState = {
 
 export const setIsPageLoading = (flag) => ({type: SET_IS_PAGE_LOADING, flag})
 
-export const setUserData = (userId, email, login) => ({
+export const setUserData =  (userId, email, login, isAuth) => ({
     type: SET_USER_DATA, data: {
         userId,
         email,
         login,
+        isAuth,
     },
 })
 
@@ -27,15 +29,39 @@ export const setUserData = (userId, email, login) => ({
 export const getAuth = () => {
     return (dispatch) => {
         dispatch(setIsPageLoading(true))
-        authAPI.me().then((response) => {
+        return authAPI.me().then((response) => {
             if (response.resultCode === 0) {
-                const {email, id: userId, login} = response.data;
-                dispatch(setUserData(userId, email, login))
+                const {email, login, id} = response.data;
+                dispatch(setUserData(id, email, login, true))
             }
         }).finally(()=>{
             dispatch(setIsPageLoading(false))
+        }).catch(()=>{
+            console.log("при загрузке произошла ошибка")
         })
     }
+}
+
+export const login =  (email, password, rememberMe) => (dispatch) =>{
+
+    authAPI.login(email, password, rememberMe).then(response =>{
+        if(response.data.resultCode === 0){
+            dispatch(getAuth())
+        }else{
+
+            let message = response.data.messages.length > 0 ? response.data.messages[0] : "some error"
+
+            dispatch(stopSubmit("login", {_error: message}))
+        }
+    })
+}
+
+export const logout = ()=> (dispatch)=>{
+    authAPI.logout().then(response=>{
+        if(response.data.resultCode === 0){
+            dispatch(setUserData(null,  null, null, false))
+        }
+    })
 }
 
 
@@ -54,7 +80,6 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
             }
         }
 
